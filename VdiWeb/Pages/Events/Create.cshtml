@@ -1,0 +1,14 @@
+﻿@page "{event:object?}"
+@model VdiWeb.Pages.Events.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create new event:</h2>
+
+<form action="post" class="form-group">
+    <div>
+        <label asp-for="@Model.Event.Name" class="col-form-label"><input type="text" asp-for="@Model.Event.Name" /></label>
+    </div>
+</form>
+

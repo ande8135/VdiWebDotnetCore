@@ -1,0 +1,55 @@
+﻿@page
+@model EventsModel
+@{
+    ViewData["Title"] = "Events";
+}
+
+<h2>Events</h2>
+
+@foreach (var ev in @Model.Events)
+{
+    <div class="card border-dark">
+        <div class="card card-header bg-dark text-light">
+            <h4>@ev.Name</h4>
+        </div>
+        <div class="card card-body">
+            <div class="col-md-4 d-inline-block">
+                <h4>Show Details:</h4>
+                <ul class="list-unstyled pl-4">
+                    <li>Where: @ev.Location.SiteName</li>
+                    <li>When: @ev.EventDateTime.DateTime</li>
+                </ul>
+            </div>
+            <div class="col-md-4 d-inline-block">
+                <h4>Bands Performing:</h4>
+                <ul class="list-unstyled pl-4">
+                    @foreach (var band in ev.BandsInfo)
+                    {
+                        @if (band.Value != null)
+                        {
+                            <li><a href="@band.Value">@band.Key</a></li>
+                        }
+                        @if (band.Value == null)
+                        {
+                            <li>@band.Key</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="card card-footer bg-dark text-light">
+            <span>
+                Site Location:<br />
+                @ev.Location.Line1<br />
+                @if (!string.IsNullOrEmpty(ev.Location.Line2))
+                {@ev.Location.Line2<br />}
+                @ev.Location.City, @ev.Location.State @ev.Location.Zip
+            </span>
+        </div>
+    </div>
+    <br />
+    
+}
+
+<a asp-page="/Events/Create" class="btn btn-primary">Create</a>
+
